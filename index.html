@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explorando con materiales naturales</title>
+
+  <!-- Iconos infantiles desde la web (puedes cambiarlos si quieres otro estilo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #fffaf0;
+      --card: rgba(255, 255, 255, 0.88);
+      --text: #473737;
+      --muted: #6f6a66;
+      --pink: #ffbfd2;
+      --yellow: #ffe58f;
+      --blue: #bfe8ff;
+      --green: #ccf3c4;
+      --purple: #dcc8ff;
+      --orange: #ffd6b3;
+      --line: #f1d9c9;
+      --shadow: 0 14px 30px rgba(0,0,0,0.08);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Fredoka", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, #fff2b8 0%, transparent 18%),
+        radial-gradient(circle at top right, #ffd6ea 0%, transparent 18%),
+        linear-gradient(180deg, #fffaf0 0%, #fef7ff 52%, #f4fcff 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.7);
+      border-bottom: 1px solid #f4dfcf;
+      padding: 12px 16px;
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      background: #fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, background 0.2s ease;
+      border: 2px solid #fff0d8;
+    }
+
+    .nav a:nth-child(1) { background: var(--yellow); }
+    .nav a:nth-child(2) { background: var(--blue); }
+    .nav a:nth-child(3) { background: var(--pink); }
+    .nav a:nth-child(4) { background: var(--green); }
+    .nav a:nth-child(5) { background: var(--purple); }
+
+    .nav a:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      padding: 72px 20px 56px;
+      text-align: center;
+      background: linear-gradient(135deg, #ffd9e8, #fff1a8, #d6f2ff);
+      border-bottom: 3px dashed #fff;
+    }
+
+    .bubble, .bubble2, .bubble3 {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.42);
+      animation: floaty 6s ease-in-out infinite;
+    }
+
+    .bubble { width: 180px; height: 180px; top: -40px; left: -30px; }
+    .bubble2 { width: 120px; height: 120px; right: 10%; top: 25px; animation-delay: 1s; }
+    .bubble3 { width: 220px; height: 220px; bottom: -90px; right: -40px; animation-delay: 2s; }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      position: relative;
+      z-index: 2;
+    }
+
+    header p {
+      max-width: 820px;
+      margin: 16px auto 0;
+      color: #5d4f4f;
+      font-size: 1.05rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+    }
+
+    .badge:nth-child(1) { background: var(--pink); }
+    .badge:nth-child(2) { background: var(--blue); }
+    .badge:nth-child(3) { background: var(--green); }
+    .badge:nth-child(4) { background: var(--yellow); }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 34px 20px 64px;
+    }
+
+    .section {
+      background: var(--card);
+      border: 2px solid rgba(241, 217, 201, 0.95);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.6s ease, translate 0.6s ease;
+    }
+
+    .section:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.09);
+    }
+
+    .reveal {
+      opacity: 0;
+      translate: 0 26px;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      translate: 0 0;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      font-size: 1.7rem;
+      color: #794d6d;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section p { margin: 0 0 14px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .placeholder,
+    .image-box {
+      border: 3px dashed #ffb88c;
+      background: linear-gradient(135deg, #fff6dc, #ffeaf3);
+      color: var(--muted);
+      border-radius: 22px;
+      min-height: 170px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.95rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+    }
+
+    .placeholder:hover,
+    .image-box:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow);
+    }
+
+    /* CAMBIA ESTO: cuando agregues tus imágenes, sustituye el div interno por una etiqueta <img> */
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 18px;
+    }
+
+    .note {
+      margin-top: 12px;
+      padding: 14px 16px;
+      background: #fff2b8;
+      border-left: 6px solid #ffbf47;
+      border-radius: 14px;
+      color: #5c4a2d;
+    }
+
+    .materials-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .material {
+      border-radius: 18px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 600;
+      border: 2px solid rgba(0,0,0,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .material:nth-child(odd) { background: var(--blue); }
+    .material:nth-child(even) { background: var(--green); }
+
+    details {
+      background: #fff8fb;
+      border: 2px dashed #eec8df;
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-top: 14px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .progress {
+      height: 14px;
+      background: #f1ecf6;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #ffbfd2, #ffd87f, #bfe8ff, #c9f2c7);
+    }
+
+    .story-box {
+      margin-top: 18px;
+      background: #ffffff;
+      border: 2px dashed #f0d6c2;
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .toggle-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, filter 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+    }
+
+    .toggle-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
+    }
+
+    .toggle-btn.pink { background: var(--pink); }
+    .toggle-btn.blue { background: var(--blue); }
+    .toggle-btn.green { background: var(--green); }
+    .toggle-btn.yellow { background: var(--yellow); }
+
+    .story-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s ease, opacity 0.35s ease, margin-top 0.35s ease;
+      opacity: 0;
+      margin-top: 0;
+    }
+
+    .story-content.open {
+      max-height: 420px;
+      opacity: 1;
+      margin-top: 14px;
+    }
+
+    .story-inner {
+      background: #fffafc;
+      border-radius: 18px;
+      padding: 16px;
+      border: 2px solid #f8e0ed;
+    }
+
+    .floating-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: var(--pink);
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      font-weight: 600;
+      z-index: 60;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 800px) {
+      .two-col { grid-template-columns: 1fr; }
+      .section { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <nav class="nav">
+      <a href="#proposito">Propósito</a>
+      <a href="#materiales">Materiales</a>
+      <a href="#exploracion">Exploración</a>
+      <a href="#descubrimientos">Descubrimientos</a>
+      <a href="#reflexion">Reflexión</a>
+    </nav>
+  </div>
+
+  <header>
+    <div class="bubble"></div>
+    <div class="bubble2"></div>
+    <div class="bubble3"></div>
+    <h1>Explorando con materiales naturales</h1>
+    <p>
+      En esta experiencia acompañé a los niños de Parvularia 4 en una jornada de exploración con arena, agua, hojas, flores y conchas. A través del contacto directo con estos materiales, pude observar cómo aprendían desde la curiosidad, el juego y el descubrimiento.
+    </p>
+    <div class="hero-badges">
+      <div class="badge"><i class="fa-solid fa-star"></i> Curiosidad</div>
+      <div class="badge"><i class="fa-solid fa-seedling"></i> Exploración</div>
+      <div class="badge"><i class="fa-solid fa-hands"></i> Juego</div>
+      <div class="badge"><i class="fa-solid fa-heart"></i> Aprendizaje activo</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="proposito" class="section two-col reveal">
+      <div>
+        <h2><i class="fa-solid fa-bullseye"></i> Propósito de la experiencia</h2>
+        <p>
+          Mi propósito fue ofrecer a los niños un espacio donde pudieran explorar libremente distintos materiales naturales y, al mismo tiempo, fortalecer su observación, su lenguaje, su creatividad y su capacidad de descubrir por sí mismos.
+        </p>
+        <p>
+          Durante esta experiencia, comprendí que cuando el ambiente está preparado con intención, los niños participan con más seguridad, expresan mejor sus ideas y convierten el juego en una verdadera oportunidad de aprendizaje.
+        </p>
+        <div class="note">
+          Esta sección funciona como introducción. Aquí conviene colocar una imagen general que muestre el ambiente o los materiales organizados antes de iniciar.
+        </div>
+      </div>
+      <div>
+        <div class="image-box">
+          <!-- CAMBIA ESTA PARTE: sustituye este texto por una imagen real, por ejemplo:
+          <img src="img/portada.jpg" alt="Ambiente preparado con materiales naturales"> -->
+          [ Colocar aquí imagen de portada: ambiente infantil o materiales naturales juntos ]
+        </div>
+        <div class="progress" aria-label="avance de la experiencia"><span></span></div>
+        <details>
+          <summary>Idea interactiva para esta portada</summary>
+          <p>Puedes convertir esta imagen en una portada más llamativa si usas una foto amplia del espacio y mantienes los tonos pastel del sitio.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="materiales" class="section reveal">
+      <h2><i class="fa-solid fa-shapes"></i> Materiales que utilicé</h2>
+      <p>
+        Para desarrollar esta experiencia preparé materiales sencillos, accesibles y cercanos al entorno de los niños. Mi intención fue que cada elemento despertara sensaciones diferentes y provocara preguntas espontáneas.
+      </p>
+      <div class="materials-list">
+        <div class="material"><i class="fa-solid fa-water"></i> Agua</div>
+        <div class="material"><i class="fa-solid fa-mountain-sun"></i> Arena</div>
+        <div class="material"><i class="fa-solid fa-leaf"></i> Hojas</div>
+        <div class="material"><i class="fa-solid fa-spa"></i> Flores</div>
+        <div class="material"><i class="fa-solid fa-fan"></i> Conchas</div>
+        <div class="material"><i class="fa-solid fa-bucket"></i> Recipientes</div>
+      </div>
+      <div class="gallery">
+        <div class="image-box">
+          <!-- CAMBIA ESTA PARTE: agrega aquí una imagen de los materiales antes de usarlos -->
+          [ Imagen de los materiales organizados ]
+        </div>
+        <div class="image-box">
+          <!-- CAMBIA ESTA PARTE: agrega aquí una imagen cercana de texturas o elementos naturales -->
+          [ Imagen cercana de hojas, flores, arena o conchas ]
+        </div>
+      </div>
+
+      <div class="story-box">
+        <button class="toggle-btn blue" data-target="historia-materiales">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Descubre qué pasó aquí
+        </button>
+        <div id="historia-materiales" class="story-content">
+          <div class="story-inner">
+            <!-- CAMBIA ESTA PARTE: edita este comentario en primera persona con lo que realmente pasó en esta sección -->
+            <p>
+              Antes de comenzar, organicé cuidadosamente cada material para que los niños pudieran verlo y acercarse con libertad. Noté que desde el inicio los colores, las formas y las texturas llamaron su atención y generaron expectativa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="exploracion" class="section reveal">
+      <h2><i class="fa-solid fa-magnifying-glass"></i> Primer momento: explorar con libertad</h2>
+      <p>
+        En el primer momento permití que los niños se acercaran libremente a los materiales. Observé cómo tocaban, mezclaban, olían, comparaban y comentaban entre ellos lo que iban descubriendo. Mi papel fue acompañar, observar y hacer preguntas breves que ampliaran su atención.
+      </p>
+      <p>
+        Fue un momento muy valioso porque el aprendizaje surgió de forma natural. No tuvieron que memorizar nada: aprendieron explorando con sus manos, con su mirada y con sus propias palabras.
+      </p>
+      <div class="gallery">
+        <div class="image-box">
+          <!-- CAMBIA ESTA PARTE: agrega una imagen del momento de exploración libre -->
+          [ Imagen de niños explorando los materiales ]
+        </div>
+        <div class="image-box">
+          <!-- CAMBIA ESTA PARTE: agrega una imagen de interacción o manipulación de texturas -->
+          [ Imagen de manos tocando arena, agua, hojas o conchas ]
+        </div>
+      </div>
+
+      <div class="story-box">
+        <button class="toggle-btn pink" data-target="historia-exploracion">
+          <i class="fa-solid fa-child-reaching"></i> Descubre qué pasó aquí
+        </button>
+        <div id="historia-exploracion" class="story-content">
+          <div class="story-inner">
+            <!-- CAMBIA ESTA PARTE: escribe aquí la anécdota breve de este momento -->
+            <p>
+              Cuando iniciamos, algunos niños se acercaron con cautela, pero en pocos minutos comenzaron a tocar los materiales con más confianza. Me llamó la atención cómo pasaron de observar en silencio a expresar lo que sentían y a compartir sus descubrimientos con entusiasmo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="descubrimientos" class="section reveal">
+      <h2><i class="fa-solid fa-lightbulb"></i> Lo que los niños descubrieron</h2>
+      <p>
+        A medida que avanzaba la actividad, identifiqué varios aprendizajes importantes. Los niños distinguieron diferencias entre texturas, reconocieron cambios al mezclar materiales y utilizaron palabras para describir lo que veían, sentían y comparaban.
+      </p>
+      <p>
+        También observé iniciativa, cooperación y creatividad. Algunos inventaron nuevas maneras de usar los materiales y otros imitaron a sus compañeros, lo que enriqueció todavía más la experiencia compartida.
+      </p>
+      <div class="gallery">
+        <div class="image-box">
+          <!-- CAMBIA ESTA PARTE: agrega una imagen donde se note el resultado o descubrimiento -->
+          [ Imagen de combinaciones o resultados creados por los niños ]
+        </div>
+        <div class="image-box">
+          <!-- CAMBIA ESTA PARTE: agrega una imagen de observación, diálogo o colaboración -->
+          [ Imagen de niños observando, hablando o comparando materiales ]
+        </div>
+      </div>
+
+      <div class="story-box">
+        <button class="toggle-btn green" data-target="historia-descubrimientos">
+          <i class="fa-solid fa-face-smile"></i> Descubre qué pasó aquí
+        </button>
+        <div id="historia-descubrimientos" class="story-content">
+          <div class="story-inner">
+            <!-- CAMBIA ESTA PARTE: describe aquí qué descubriste tú al observarlos -->
+            <p>
+              En este momento confirmé que los niños no solo manipulaban materiales: también estaban pensando, comparando y dando significado a lo que hacían. Sus comentarios me permitieron ver que el juego estaba conectado con procesos reales de aprendizaje.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reflexion" class="section reveal">
+      <h2><i class="fa-solid fa-book-open"></i> Lo que esta experiencia me dejó</h2>
+      <p>
+        Esta experiencia me permitió reafirmar que el aprendizaje en la primera infancia necesita espacios ricos en exploración, contacto directo y libertad guiada. Aprendí que los materiales simples pueden generar experiencias profundas cuando se presentan con intención pedagógica.
+      </p>
+      <p>
+        Como futura docente, esta vivencia fortaleció mi mirada sobre la importancia de observar con atención, escuchar a los niños y valorar cada descubrimiento como parte del proceso educativo.
+      </p>
+      <div class="gallery">
+        <div class="image-box">
+          <!-- CAMBIA ESTA PARTE: aquí puedes poner una imagen final más emotiva o una escena de cierre -->
+          [ Imagen final de cierre o reflexión ]
+        </div>
+      </div>
+
+      <div class="story-box">
+        <button class="toggle-btn yellow" data-target="historia-reflexion">
+          <i class="fa-solid fa-cloud-sun"></i> Descubre qué pasó aquí
+        </button>
+        <div id="historia-reflexion" class="story-content">
+          <div class="story-inner">
+            <!-- CAMBIA ESTA PARTE: escribe aquí una reflexión personal corta y humana -->
+            <p>
+              Al finalizar, sentí satisfacción al ver que una propuesta sencilla había generado tanto interés y participación. Esta experiencia me recordó que acompañar bien a los niños no siempre exige recursos complejos, sino sensibilidad, observación y una intención educativa clara.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="floating-btn" href="#top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+    <i class="fa-solid fa-arrow-up"></i> Subir
+  </a>
+
+  <footer>
+    Portafolio digital en primera persona · Experiencia pedagógica con materiales naturales
+  </footer>
+
+  <script>
+    // Animación suave al hacer scroll: muestra cada sección cuando entra en pantalla
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Botones interactivos: abren y cierran el bloque "Descubre qué pasó aquí"
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+
+    toggleButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const target = document.getElementById(targetId);
+        const isOpen = target.classList.contains('open');
+
+        if (isOpen) {
+          target.classList.remove('open');
+          button.innerHTML = button.innerHTML.replace('Ocultar este momento', 'Descubre qué pasó aquí');
+        } else {
+          target.classList.add('open');
+          button.innerHTML = button.innerHTML.replace('Descubre qué pasó aquí', 'Ocultar este momento');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
